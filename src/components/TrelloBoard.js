@@ -16,7 +16,7 @@ const TrelloBoard = () => {
           title: "Task 2",
           description: "Short Description",
           labels: ["green", "yellow", "blue", "red"],
-          members: [2],
+          members: [0, 2],
         },
       ],
     },
@@ -38,7 +38,10 @@ const TrelloBoard = () => {
   return (
     <>
       <div className="board-wrapper">
-        {list && list.map((item) => <List item={item} />)}
+        {list &&
+          list.map((item, index) => (
+            <List item={item} index={index} key={index} />
+          ))}
       </div>
     </>
   );
