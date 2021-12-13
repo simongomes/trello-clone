@@ -4,7 +4,7 @@ import List from "./List";
 const TrelloBoard = () => {
   const initialList = [
     {
-      title: "To Do",
+      title: "Todo",
       tasks: [
         {
           title: "Task 1",

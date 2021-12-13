@@ -1,8 +1,10 @@
-const List = (props) => {
+const List = ({ item }) => {
   return (
-    <>
-      <h2>List</h2>
-    </>
+    <div className="list-wrapper">
+      <div className="list-header">
+        <h4 className="list-title">{item.title}</h4>
+      </div>
+    </div>
   );
 };
 

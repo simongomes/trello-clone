@@ -4,6 +4,8 @@
 }
 body {
   background-color: #838c91;
+  color: #172b4d;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 .App {
   padding: 20px;
@@ -12,4 +14,18 @@ body {
   display: flex;
   justify-content: start;
   align-items: flex-start;
+}
+.list-wrapper {
+  width: 250px;
+  min-height: 50px;
+  background-color: #ebecf0;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0 5px;
+}
+.list-wrapper .list-header {
+  padding: 5px;
+}
+.list-wrapper .list-header .list-title {
+  font-size: 16px;
 }
