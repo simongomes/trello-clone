@@ -42,15 +42,20 @@ const Task = ({ task, items, listIndex, taskIndex, handleMoveCard }) => {
             onMouseLeave={() => setShowMove(false)}
           >
             {items &&
-              items.map((item, index) => (
-                <div
-                  className="move-item"
-                  key={index}
-                  onClick={() => moveCardHandler(taskIndex, listIndex, index)}
-                >
-                  {item.title}
-                </div>
-              ))}
+              items.map(
+                (item, index) =>
+                  index !== listIndex && (
+                    <div
+                      className="move-item"
+                      key={index}
+                      onClick={() =>
+                        moveCardHandler(taskIndex, listIndex, index)
+                      }
+                    >
+                      {item.title}
+                    </div>
+                  )
+              )}
           </div>
         )}
       </div>

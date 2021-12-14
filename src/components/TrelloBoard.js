@@ -2,6 +2,8 @@ import { useState } from "react";
 import List from "./List";
 
 const TrelloBoard = () => {
+  const [enableAddList, setEnableAddList] = useState(false);
+  const [newListTitle, setNewListTitle] = useState("");
   const initialList = [
     {
       title: "Todo",
@@ -15,7 +17,7 @@ const TrelloBoard = () => {
         {
           title: "Task 2",
           description: "Short Description",
-          labels: ["green", "yellow", "blue", "red"],
+          labels: ["green", "yellow", "red"],
           members: [0, 2],
         },
       ],
@@ -26,7 +28,7 @@ const TrelloBoard = () => {
         {
           title: "Task 3",
           description: "Short Description",
-          labels: ["green", "yellow", "blue", "red"],
+          labels: ["green", "blue", "red"],
           members: [2],
         },
       ],
@@ -38,7 +40,6 @@ const TrelloBoard = () => {
 
   const addNewCardHandler = (title, index) => {
     const newList = list;
-    console.log(newList[index].tasks);
     newList[index].tasks = [
       ...newList[index].tasks,
       {
@@ -54,11 +55,21 @@ const TrelloBoard = () => {
   };
 
   const moveCardHandler = (cardIndex, listIndex, moveIndex) => {
-    console.log(cardIndex, listIndex, moveIndex);
     const moveItem = list[listIndex].tasks[cardIndex];
     list[listIndex].tasks.splice(cardIndex, 1);
     list[moveIndex].tasks.push(moveItem);
     setRenderKey(renderKey + 1);
+  };
+
+  const addNewList = () => {
+    const newList = list;
+    const newListItem = {
+      title: newListTitle,
+      tasks: [],
+    };
+    newList.push(newListItem);
+    setList(newList);
+    setEnableAddList(false);
   };
 
   return (
@@ -75,6 +86,34 @@ const TrelloBoard = () => {
               moveCardHandler={moveCardHandler}
             />
           ))}
+        <div className="add-list-wrapper">
+          {!enableAddList && (
+            <div
+              className="add-list-button"
+              onClick={() => setEnableAddList(true)}
+            >
+              + Add list
+            </div>
+          )}
+          {enableAddList && (
+            <div className="add-list-field">
+              <input
+                type="text"
+                placeholder="Add list title"
+                onInput={(e) => setNewListTitle(e.target.value)}
+              />
+              <button className="button button-primary" onClick={addNewList}>
+                Add List
+              </button>
+              <button
+                className="button button-secondary"
+                onClick={() => setEnableAddList(false)}
+              >
+                Close
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
