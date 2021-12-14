@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Task from "./Task";
 
-const List = ({ item, index, addNewCardHandler }) => {
+const List = ({ items, item, index, addNewCardHandler, moveCardHandler }) => {
   const [createMode, setCreateMode] = useState(false);
   const [newCardTitle, setNewCardTitle] = useState("");
 
@@ -16,14 +16,24 @@ const List = ({ item, index, addNewCardHandler }) => {
     }
     addNewCardHandler(newCardTitle, index);
   };
+  const handleMoveCard = (cardIndex, listIndex, index) => {
+    moveCardHandler(cardIndex, listIndex, index);
+  };
   return (
     <div className="list-wrapper">
       <div className="list-header">
         <h4 className="list-title">{item.title}</h4>
       </div>
       <div className="tasks-wrapper">
-        {item.tasks.map((task, index) => (
-          <Task task={task} key={index} />
+        {item.tasks.map((task, i) => (
+          <Task
+            task={task}
+            key={i}
+            listIndex={index}
+            taskIndex={i}
+            items={items}
+            handleMoveCard={handleMoveCard}
+          />
         ))}
         <div className="create-task-wrapper">
           {!createMode && (

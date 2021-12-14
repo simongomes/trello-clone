@@ -53,16 +53,26 @@ const TrelloBoard = () => {
     setRenderKey(renderKey + 1);
   };
 
+  const moveCardHandler = (cardIndex, listIndex, moveIndex) => {
+    console.log(cardIndex, listIndex, moveIndex);
+    const moveItem = list[listIndex].tasks[cardIndex];
+    list[listIndex].tasks.splice(cardIndex, 1);
+    list[moveIndex].tasks.push(moveItem);
+    setRenderKey(renderKey + 1);
+  };
+
   return (
     <>
       <div className="board-wrapper" key={renderKey}>
         {list &&
           list.map((item, index) => (
             <List
+              items={list}
               item={item}
               index={index}
               key={index}
               addNewCardHandler={addNewCardHandler}
+              moveCardHandler={moveCardHandler}
             />
           ))}
       </div>

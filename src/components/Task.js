@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 
-const Task = ({ task }) => {
+const Task = ({ task, items, listIndex, taskIndex, handleMoveCard }) => {
   const { title, description, labels, members } = task;
 
   const [taskMembers, setTaskMembers] = useState([]);
+  const [showMove, setShowMove] = useState(false);
 
   useEffect(() => {
     async function setMembers() {
@@ -18,18 +19,46 @@ const Task = ({ task }) => {
     setMembers();
   }, []);
 
+  const moveCardHandler = (taskIndex, listIndex, index) => {
+    if (listIndex === index) return;
+    handleMoveCard(taskIndex, listIndex, index);
+    setShowMove(false);
+  };
+
   return (
     <div className="task-item">
       <div className="task-labels">
-        {labels.map((label) => (
-          <span className={label}></span>
+        {labels.map((label, i) => (
+          <span className={label} key={i}></span>
         ))}
+      </div>
+      <div className="move-wrapper">
+        <div className="move-button" onClick={() => setShowMove(true)}>
+          Move
+        </div>
+        {showMove && (
+          <div
+            className="move-item-wrapper"
+            onMouseLeave={() => setShowMove(false)}
+          >
+            {items &&
+              items.map((item, index) => (
+                <div
+                  className="move-item"
+                  key={index}
+                  onClick={() => moveCardHandler(taskIndex, listIndex, index)}
+                >
+                  {item.title}
+                </div>
+              ))}
+          </div>
+        )}
       </div>
       <span className="task-title">{title}</span>
       <div className="task-members">
         {taskMembers &&
-          taskMembers.map((member) => (
-            <img src={member.picture.thumbnail} alt="user" />
+          taskMembers.map((member, i) => (
+            <img src={member.picture.thumbnail} key={i} alt="user" />
           ))}
       </div>
     </div>
