@@ -72,6 +72,13 @@ const TrelloBoard = () => {
     setEnableAddList(false);
   };
 
+  const removeListItem = (listIndex) => {
+    const newList = list;
+    newList.splice(listIndex, 1);
+    setList(newList);
+    setRenderKey(renderKey + 1);
+  };
+
   return (
     <>
       <div className="board-wrapper" key={renderKey}>
@@ -84,6 +91,7 @@ const TrelloBoard = () => {
               key={index}
               addNewCardHandler={addNewCardHandler}
               moveCardHandler={moveCardHandler}
+              removeListItem={removeListItem}
             />
           ))}
         <div className="add-list-wrapper">

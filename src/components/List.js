@@ -1,7 +1,14 @@
 import { useState } from "react";
 import Task from "./Task";
 
-const List = ({ items, item, index, addNewCardHandler, moveCardHandler }) => {
+const List = ({
+  items,
+  item,
+  index,
+  addNewCardHandler,
+  moveCardHandler,
+  removeListItem,
+}) => {
   const [createMode, setCreateMode] = useState(false);
   const [newCardTitle, setNewCardTitle] = useState("");
 
@@ -19,12 +26,18 @@ const List = ({ items, item, index, addNewCardHandler, moveCardHandler }) => {
   const handleMoveCard = (cardIndex, listIndex, index) => {
     moveCardHandler(cardIndex, listIndex, index);
   };
+  const removeListHandler = () => {
+    removeListItem(index);
+  };
   return (
     <div className="list-wrapper">
       <div className="list-header">
         <h4 className="list-title">{item.title}</h4>
       </div>
       <div className="tasks-wrapper">
+        <span className="list-close-button" onClick={removeListHandler}>
+          +
+        </span>
         {item.tasks.map((task, i) => (
           <Task
             task={task}
