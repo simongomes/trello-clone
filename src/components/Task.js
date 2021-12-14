@@ -14,8 +14,6 @@ const Task = ({ task }) => {
           return members.includes(index);
         })
       );
-
-      console.log(taskMembers);
     }
     setMembers();
   }, []);

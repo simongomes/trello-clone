@@ -6,6 +6,7 @@ body {
   background-color: #838c91;
   color: #172b4d;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 100;
 }
 .App {
   padding: 20px;
@@ -100,4 +101,47 @@ body {
   height: 30px;
   border-radius: 50%;
   margin-left: 3px;
+}
+.tasks-wrapper .create-task-wrapper .create-button {
+  font-size: 14px;
+  padding: 10px 5px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.tasks-wrapper .create-task-wrapper .create-button:hover {
+  background-color: #cbcbcb;
+}
+
+.tasks-wrapper .create-task-wrapper .create-input-title {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 5px 8px;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 #091e4240;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 8px;
+  max-width: 300px;
+  min-height: 50px;
+  position: relative;
+  text-decoration: none;
+  box-sizing: border-box;
+  border: 0 none;
+  resize: none;
+  outline: none;
+}
+.button {
+  padding: 6px 12px;
+  border-radius: 3px;
+  margin-right: 5px;
+  border: 1px solid #055a8c;
+  color: #ffffff;
+  cursor: pointer;
+}
+.button.button-primary {
+  background-color: #055a8c;
+}
+.button.button-secondary {
+  background-color: #ffffff;
+  color: #252525;
 }

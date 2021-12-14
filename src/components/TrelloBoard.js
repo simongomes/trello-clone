@@ -34,13 +34,36 @@ const TrelloBoard = () => {
   ];
 
   const [list, setList] = useState(initialList);
+  const [renderKey, setRenderKey] = useState(0);
+
+  const addNewCardHandler = (title, index) => {
+    const newList = list;
+    console.log(newList[index].tasks);
+    newList[index].tasks = [
+      ...newList[index].tasks,
+      {
+        title: title,
+        description: "",
+        labels: [],
+        members: [],
+      },
+    ];
+
+    setList(newList);
+    setRenderKey(renderKey + 1);
+  };
 
   return (
     <>
-      <div className="board-wrapper">
+      <div className="board-wrapper" key={renderKey}>
         {list &&
           list.map((item, index) => (
-            <List item={item} index={index} key={index} />
+            <List
+              item={item}
+              index={index}
+              key={index}
+              addNewCardHandler={addNewCardHandler}
+            />
           ))}
       </div>
     </>
