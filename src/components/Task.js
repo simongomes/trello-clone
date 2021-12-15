@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 
-const Task = ({ task, items, listIndex, taskIndex, handleMoveCard }) => {
+const Task = ({
+  task,
+  items,
+  listIndex,
+  taskIndex,
+  handleMoveCard,
+  handleEditCard,
+}) => {
   const { title, description, labels, members } = task;
 
   const [taskMembers, setTaskMembers] = useState([]);
@@ -19,21 +26,31 @@ const Task = ({ task, items, listIndex, taskIndex, handleMoveCard }) => {
     setMembers();
   }, []);
 
-  const moveCardHandler = (taskIndex, listIndex, index) => {
+  const moveCardHandler = (e, taskIndex, listIndex, index) => {
+    e.stopPropagation();
     if (listIndex === index) return;
     handleMoveCard(taskIndex, listIndex, index);
     setShowMove(false);
   };
 
+  const editCardHandler = (e) => {
+    handleEditCard(taskIndex, listIndex);
+  };
+
+  const showMoveModal = (e) => {
+    e.stopPropagation();
+    setShowMove(true);
+  };
+
   return (
-    <div className="task-item">
+    <div className="task-item" onClick={editCardHandler}>
       <div className="task-labels">
         {labels.map((label, i) => (
           <span className={label} key={i}></span>
         ))}
       </div>
       <div className="move-wrapper">
-        <div className="move-button" onClick={() => setShowMove(true)}>
+        <div className="move-button" onClick={showMoveModal}>
           Move
         </div>
         {showMove && (
@@ -48,8 +65,8 @@ const Task = ({ task, items, listIndex, taskIndex, handleMoveCard }) => {
                     <div
                       className="move-item"
                       key={index}
-                      onClick={() =>
-                        moveCardHandler(taskIndex, listIndex, index)
+                      onClick={(e) =>
+                        moveCardHandler(e, taskIndex, listIndex, index)
                       }
                     >
                       {item.title}

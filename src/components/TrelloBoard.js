@@ -1,9 +1,16 @@
 import { useState } from "react";
+import EditTask from "./EditTask";
 import List from "./List";
 
 const TrelloBoard = () => {
   const [enableAddList, setEnableAddList] = useState(false);
   const [newListTitle, setNewListTitle] = useState("");
+  const [enableEditTask, setEnableEditTask] = useState(false);
+
+  const [editListIndex, setEditListIndex] = useState(null);
+  const [editTaskIndex, setEditTaskIndex] = useState(null);
+  const [editItem, setEditItem] = useState({});
+
   const initialList = [
     {
       title: "Todo",
@@ -79,8 +86,28 @@ const TrelloBoard = () => {
     setRenderKey(renderKey + 1);
   };
 
+  const editCardHandler = (taskIndex, listIndex) => {
+    setEditTaskIndex(taskIndex);
+    setEditListIndex(listIndex);
+    const editItem = list[listIndex].tasks[taskIndex];
+    setEditItem(editItem);
+    setEnableEditTask(true);
+  };
+
+  const updateTask = (updatedTask) => {
+    const updatedList = list;
+    updatedList[editListIndex].tasks[editTaskIndex] = updatedTask;
+    setList(updatedList);
+    setEnableEditTask(false);
+    setRenderKey(renderKey + 1);
+  };
+
+  const closeEdit = () => {
+    setEnableEditTask(false);
+  };
+
   return (
-    <>
+    <div className="main-wrapper">
       <div className="board-wrapper" key={renderKey}>
         {list &&
           list.map((item, index) => (
@@ -92,6 +119,7 @@ const TrelloBoard = () => {
               addNewCardHandler={addNewCardHandler}
               moveCardHandler={moveCardHandler}
               removeListItem={removeListItem}
+              editCardHandler={editCardHandler}
             />
           ))}
         <div className="add-list-wrapper">
@@ -123,7 +151,14 @@ const TrelloBoard = () => {
           )}
         </div>
       </div>
-    </>
+      {enableEditTask && (
+        <EditTask
+          task={editItem}
+          updateTask={updateTask}
+          closeEdit={closeEdit}
+        />
+      )}
+    </div>
   );
 };
 

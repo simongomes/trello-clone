@@ -11,10 +11,14 @@ body {
 .App {
   padding: 20px;
 }
+.main-wrapper {
+  position: relative;
+}
 .board-wrapper {
   display: flex;
   justify-content: start;
   align-items: flex-start;
+  position: relative;
 }
 .list-wrapper {
   width: 250px;
@@ -59,29 +63,29 @@ body {
 .tasks-wrapper .task-item:hover {
   background-color: #f8f8f8;
 }
-.tasks-wrapper .task-item .task-labels {
+.task-labels {
   display: flex;
   justify-content: start;
   align-items: center;
   margin-bottom: 5px;
 }
-.tasks-wrapper .task-item .task-labels span {
+.task-labels span {
   width: 15px;
   height: 5px;
   background-color: #cbcbcb;
   margin-right: 3px;
   border-radius: 5px;
 }
-.tasks-wrapper .task-item .task-labels span.green {
+.task-labels span.green {
   background-color: yellowgreen;
 }
-.tasks-wrapper .task-item .task-labels span.yellow {
+.task-labels span.yellow {
   background-color: yellow;
 }
-.tasks-wrapper .task-item .task-labels span.blue {
+span.blue {
   background-color: blueviolet;
 }
-.tasks-wrapper .task-item .task-labels span.red {
+.task-labels span.red {
   background-color: red;
 }
 
@@ -156,7 +160,7 @@ body {
   color: #252525;
 }
 
-.tasks-wrapper .task-item .move-button {
+.move-button {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
     Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   font-weight: 500;
@@ -215,4 +219,96 @@ body {
   padding: 5px;
   box-sizing: border-box;
   margin-bottom: 5px;
+}
+.edit-task-wrapper {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+}
+.edit-task-wrapper .edit-task-container {
+  max-width: 650px;
+  min-height: 500px;
+  background-color: #ffffff;
+  margin: 10vh auto 0;
+  padding: 20px;
+  border-radius: 3px;
+}
+.edit-task-container {
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+}
+.edit-task-container .edit-inputes {
+  width: 50%;
+  padding: 15px;
+  box-sizing: border-box;
+}
+.edit-task-container .edit-actions {
+  width: 50%;
+  padding: 15px;
+  box-sizing: border-box;
+}
+.edit-task-container .edit-inputes .input-field {
+  padding: 5px;
+  width: 100%;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+.edit-task-container .edit-actions h4 {
+  margin-bottom: 10px;
+}
+.edit-task-container .edit-actions .assigne-thumb {
+  width: 35px;
+  border-radius: 50%;
+  margin-right: 3px;
+}
+.edit-task-container .edit-actions .edit-assigns {
+  margin-bottom: 20px;
+}
+.assign-contents,
+.label-contents {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.assign-contents img,
+.assign-contents .non-assigned-member {
+  cursor: pointer;
+}
+
+.already-assigned,
+.non-assigned {
+  width: 50%;
+}
+.assign-contents .member-name {
+  font-size: 12px;
+}
+.label-contents .label-block {
+  width: 100%;
+  height: 25px;
+  margin-bottom: 3px;
+}
+
+.label-contents .label-block {
+  width: 100%;
+  height: 25px;
+  margin-bottom: 3px;
+  background-color: #cbcbcb;
+  cursor: pointer;
+}
+
+.label-contents .label-block.green {
+  background-color: yellowgreen;
+}
+.label-contents .label-block.yellow {
+  background-color: yellow;
+}
+.label-contents .label-block.blue {
+  background-color: blueviolet;
+}
+.label-contents .label-block.red {
+  background-color: red;
 }

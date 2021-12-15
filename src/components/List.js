@@ -8,6 +8,7 @@ const List = ({
   addNewCardHandler,
   moveCardHandler,
   removeListItem,
+  editCardHandler,
 }) => {
   const [createMode, setCreateMode] = useState(false);
   const [newCardTitle, setNewCardTitle] = useState("");
@@ -29,6 +30,9 @@ const List = ({
   const removeListHandler = () => {
     removeListItem(index);
   };
+  const handleEditCard = (taskIndex, listIndex) => {
+    editCardHandler(taskIndex, listIndex);
+  };
   return (
     <div className="list-wrapper">
       <div className="list-header">
@@ -46,6 +50,7 @@ const List = ({
             taskIndex={i}
             items={items}
             handleMoveCard={handleMoveCard}
+            handleEditCard={handleEditCard}
           />
         ))}
         <div className="create-task-wrapper">
