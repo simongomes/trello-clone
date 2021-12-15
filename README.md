@@ -6,7 +6,7 @@
 
 Clone the repository. While you are inside the project run `npm install` to install all the dependencies.
 
-### Step #1 - Run The App:
+### Step #2 - Run The App:
 
 Once all the dependencies are installed, use `npm start` to run the application. App will be up and running on `http://localhost:3000`
 
